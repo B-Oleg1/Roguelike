@@ -23,6 +23,12 @@ public class PlayerMovementScript : MonoBehaviour
     {
         _moveX = Input.GetAxis("Horizontal");
         _moveY = Input.GetAxis("Vertical");
+
+        if (Mathf.Abs(_moveX) > 0.7 && Mathf.Abs(_moveY) > 0.7)
+        {
+            _moveX = 0.7f * (_moveX / Mathf.Abs(_moveX));
+            _moveY = 0.7f * (_moveY / Mathf.Abs(_moveY));
+        }
     }
 
     private void FixedUpdate()
