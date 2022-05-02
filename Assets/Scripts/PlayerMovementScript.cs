@@ -7,16 +7,19 @@ public class PlayerMovementScript : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
 
     private float _moveX = 0;
     private float _moveY = 0;
 
     private float _speed = 5;
+    private bool _lookRight = true;
 
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -24,10 +27,31 @@ public class PlayerMovementScript : MonoBehaviour
         _moveX = Input.GetAxis("Horizontal");
         _moveY = Input.GetAxis("Vertical");
 
-        if (Mathf.Abs(_moveX) > 0.7 && Mathf.Abs(_moveY) > 0.7)
+        if (_rigidbody2D.velocity.magnitude > 0.1f)
         {
-            _moveX = 0.7f * (_moveX / Mathf.Abs(_moveX));
-            _moveY = 0.7f * (_moveY / Mathf.Abs(_moveY));
+            _animator.SetBool("Run", true);
+
+            if (_moveX < 0 && _lookRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                _lookRight = false;
+            }
+            else if (_moveX > 0 && !_lookRight)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                _lookRight = true;
+            }
+
+        }
+        else
+        {
+            _animator.SetBool("Run", false);
+        }
+
+        if (Mathf.Abs(_moveX) > 0.75f && Mathf.Abs(_moveY) > 0.75f)
+        {
+            _moveX = 0.75f * (_moveX / Mathf.Abs(_moveX));
+            _moveY = 0.75f * (_moveY / Mathf.Abs(_moveY));
         }
     }
 
