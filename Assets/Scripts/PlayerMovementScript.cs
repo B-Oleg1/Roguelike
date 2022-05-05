@@ -12,8 +12,7 @@ public class PlayerMovementScript : MonoBehaviour
     private float _moveX = 0;
     private float _moveY = 0;
 
-    private float _speed = 5;
-    private bool _lookRight = true;
+    private float _speed = 3.5f;
 
     private void Start()
     {
@@ -31,17 +30,16 @@ public class PlayerMovementScript : MonoBehaviour
         {
             _animator.SetBool("Run", true);
 
-            if (_moveX < 0 && _lookRight)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                _lookRight = false;
-            }
-            else if (_moveX > 0 && !_lookRight)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                _lookRight = true;
-            }
-
+            //if (_moveX < 0 && _lookRight)
+            //{
+            //    transform.rotation = Quaternion.Euler(0, 180, 0);
+            //    _lookRight = false;
+            //}
+            //else if (_moveX > 0 && !_lookRight)
+            //{
+            //    transform.rotation = Quaternion.Euler(0, 0, 0);
+            //    _lookRight = true;
+            //}
         }
         else
         {

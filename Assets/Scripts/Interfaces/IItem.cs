@@ -10,6 +10,7 @@ namespace Assets.Scripts.Interfaces
 {
     interface IItem
     {
-        public TypeItems TypeItems { get; }
+        public TypeItems TypeItem { get; }
+        public RarityItems RarityItem { get; }
     }
 }
