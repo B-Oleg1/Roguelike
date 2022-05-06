@@ -15,7 +15,7 @@ public class PlayerInventoryScript : MonoBehaviour
 
     private void Start()
     {
-        _guns = new GameObject[3];
+        _guns = new GameObject[3]; 
     }
 
     private void Update()
@@ -24,21 +24,27 @@ public class PlayerInventoryScript : MonoBehaviour
         {
             if (_currentGun != _guns[0])
             {
+                _currentGun.SetActive(false);
                 _currentGun = _guns[0];
+                _currentGun.SetActive(true);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (_currentGun != _guns[1])
             {
+                _currentGun.SetActive(false);
                 _currentGun = _guns[1];
+                _currentGun.SetActive(true);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (_currentGun != _guns[2])
             {
+                _currentGun.SetActive(false);
                 _currentGun = _guns[2];
+                _currentGun.SetActive(true);
             }
         }
 

@@ -8,6 +8,7 @@ namespace Assets.Scripts.Interfaces
         public TypeGuns TypeGun { get; }
         public int MaxBullets { get; }
         public int Damage { get; }
+        public int PriceBullet { get; }
         public float ShootFrequency { get; }
         public float TimeReload { get; }
         public float BulletSpeed { get; }

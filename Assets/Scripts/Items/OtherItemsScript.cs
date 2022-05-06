@@ -12,13 +12,13 @@ public class OtherItemsScript : MonoBehaviour
             switch (_otherTypeItems)
             {
                 case OtherTypeItems.Heal:
-                    PlayerInfoScript.Instantiate.UpdateHeal(1);
+                    PlayerInfoScript.Instance.UpdateHeal(1);
                     break;
                 case OtherTypeItems.Energy:
-                    PlayerInfoScript.Instantiate.UpdateEnergy(5);
+                    PlayerInfoScript.Instance.UpdateEnergy(5);
                     break;
                 case OtherTypeItems.Coin:
-                    PlayerInfoScript.Instantiate.UpdateCoins(1);
+                    PlayerInfoScript.Instance.UpdateCoins(1);
                     break;
             }
 

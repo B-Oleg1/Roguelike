@@ -42,7 +42,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -288,6 +288,7 @@ MonoBehaviour:
   _typeGun: 1
   _maxBullets: 12
   _damage: 3
+  _priceBullet: 3
   _shootFrequency: 0.25
   _timeReload: 1
   _bulletSpeed: 7.5

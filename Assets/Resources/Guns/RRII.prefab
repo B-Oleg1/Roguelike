@@ -160,6 +160,7 @@ MonoBehaviour:
   _typeGun: 0
   _maxBullets: 9
   _damage: 21
+  _priceBullet: 9
   _shootFrequency: 0.51
   _timeReload: 1.75
   _bulletSpeed: 6.5
@@ -223,7 +224,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

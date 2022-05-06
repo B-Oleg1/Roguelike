@@ -11,6 +11,7 @@ public class RifleScript : MonoBehaviour, IItem, IGun
     [SerializeField] private TypeGuns _typeGun;
     [SerializeField] private int _maxBullets;
     [SerializeField] private int _damage;
+    [SerializeField] private int _priceBullet;
     [SerializeField] private float _shootFrequency;
     [SerializeField] private float _timeReload;
     [SerializeField] private float _bulletSpeed;
@@ -26,6 +27,7 @@ public class RifleScript : MonoBehaviour, IItem, IGun
     public TypeGuns TypeGun => _typeGun;
     public int MaxBullets => _maxBullets;
     public int Damage => _damage;
+    public int PriceBullet => _priceBullet;
     public float ShootFrequency => _shootFrequency;
     public float TimeReload => _timeReload;
     public float BulletSpeed => _bulletSpeed;
@@ -56,7 +58,7 @@ public class RifleScript : MonoBehaviour, IItem, IGun
             _reloadTime -= Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Mouse0) && _shootFreq <= 0 && _reloadTime <= 0 && _quantityBullets > 0)
+        if (Input.GetKey(KeyCode.Mouse0) && _shootFreq <= 0 && _reloadTime <= 0 && _quantityBullets > 0 && PlayerInfoScript.Instance.Energy >= _priceBullet)
         {
             Shoot();
         }
@@ -71,6 +73,8 @@ public class RifleScript : MonoBehaviour, IItem, IGun
     {
         _shootFreq = ShootFrequency;
         _quantityBullets--;
+
+        PlayerInfoScript.Instance.UpdateEnergy(-PriceBullet);
 
         AudioSource.clip = ShootAudioClip;
         AudioSource.Play();

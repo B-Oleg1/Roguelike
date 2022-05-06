@@ -260,6 +260,7 @@ MonoBehaviour:
   _typeGun: 0
   _maxBullets: 1
   _damage: 30
+  _priceBullet: 15
   _shootFrequency: 0
   _timeReload: 5
   _bulletSpeed: 0
