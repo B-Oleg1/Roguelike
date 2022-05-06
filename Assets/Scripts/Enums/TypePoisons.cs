@@ -2,7 +2,11 @@
 {
     public enum TypePoisons
     {
-        Heal,
-        Power
+        BigHeal,
+        MediumHeal,
+        LowHeal,
+        BigEnergy,
+        MediumEnergy,
+        LowEnergy
     }
 }

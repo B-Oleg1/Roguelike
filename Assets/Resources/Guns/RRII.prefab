@@ -160,11 +160,11 @@ MonoBehaviour:
   _typeGun: 0
   _maxBullets: 9
   _damage: 21
-  _shootFrequency: 0.55
+  _shootFrequency: 0.51
   _timeReload: 1.75
   _bulletSpeed: 6.5
   _lifeTime: 2.35
-  _spread: 1.75
+  _spread: 1
   _shootPoint: {fileID: 6314478763736058349}
   _bulletObject: {fileID: 1709804303397022081, guid: 6a6726997f7648646befa723641461d0, type: 3}
   _audioSource: {fileID: 2539850481986729192}
