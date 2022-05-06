@@ -2,8 +2,8 @@
 {
     public enum TypeItems
     {
-        Common,
-        Rare,
-        Legendary
+        Gun,
+        Mineral,
+        Poison
     }
 }

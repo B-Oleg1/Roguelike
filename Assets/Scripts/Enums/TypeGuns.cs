@@ -4,6 +4,6 @@
     {
         Main,
         Pistol,
-        Meleex
+        Melee
     }
 }
