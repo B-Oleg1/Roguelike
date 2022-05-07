@@ -15,16 +15,17 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        if (_player != null && Vector2.Distance(transform.position, _player.transform.position) < 3f)
+        if (_player != null && Vector2.Distance(transform.position, _player.transform.position) < 1f) 
         {
             _animator.SetTrigger("Attack");
             PlayerInfoScript.Instance.UpdateHeal(_damage);
         }
-        else
+        else if (_player != null)
         {
             _navMeshAgent.destination = _player.transform.position;
         }
