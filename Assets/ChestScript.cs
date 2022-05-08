@@ -32,21 +32,9 @@ public class ChestScript : MonoBehaviour
             i++; 
         }
 
-        SpawnOtherItems("Coin", 3);
-        SpawnOtherItems("Health", 1);
-        SpawnOtherItems("Energy", 5);
-    }
-
-    private void SpawnOtherItems(string itemName, int maxQuantity)
-    {
-        var quantityCoins = Random.Range(0, maxQuantity);
-        for (int j = 0; j < quantityCoins; j++)
-        {
-            Instantiate(Resources.Load<GameObject>($"ItemsFromChests/{itemName}"),
-                new Vector2(transform.position.x + Random.Range(-1f, 1f),
-                    transform.position.y - Random.Range(0f, 1f)),
-                Quaternion.identity);
-        }
+        GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Coin, 3, transform.position);
+        GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Health, 3, transform.position);
+        GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Energy, 7, transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

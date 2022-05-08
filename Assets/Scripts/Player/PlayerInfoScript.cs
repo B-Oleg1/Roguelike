@@ -33,11 +33,13 @@ public class PlayerInfoScript : MonoBehaviour
         UpdateCoins(0);
     }
 
-    public void UpdateHeal(int quantity)
+    public bool UpdateHeal(int quantity)
     {
-        if (Health + quantity > 100)
+        bool take = true;
+
+        if (quantity > 0 && Health >= 100)
         {
-            Health = 100;
+            take = false;
         }
         else if (Health - quantity <= 0)
         {
@@ -50,13 +52,17 @@ public class PlayerInfoScript : MonoBehaviour
 
         _healthSlider.value = Health / 100f;
         _healthText.text = Health.ToString();
+
+        return take;
     }
     
-    public void UpdateEnergy(int quantity)
+    public bool UpdateEnergy(int quantity)
     {
-        if (Energy + quantity > 100)
+        bool take = true;
+
+        if (quantity > 0 && Energy >= 100)
         {
-            Energy = 100;
+            take = false;
         }
         else
         {
@@ -65,6 +71,8 @@ public class PlayerInfoScript : MonoBehaviour
 
         _energySlider.value = Energy / 100f;
         _energyText.text = Energy.ToString();
+
+        return take; 
     }
     
     public void UpdateCoins(int quantity)

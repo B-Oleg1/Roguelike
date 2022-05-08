@@ -22,7 +22,7 @@ public class PlayerInventoryScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (_currentGun != _guns[0])
+            if (_currentGun != _guns[0] && _guns[0] != null) 
             {
                 _currentGun.SetActive(false);
                 _currentGun = _guns[0];
@@ -31,7 +31,7 @@ public class PlayerInventoryScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (_currentGun != _guns[1])
+            if (_currentGun != _guns[1] && _guns[1] != null)
             {
                 _currentGun.SetActive(false);
                 _currentGun = _guns[1];
@@ -40,7 +40,7 @@ public class PlayerInventoryScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (_currentGun != _guns[2])
+            if (_currentGun != _guns[2] && _guns[2] != null)
             {
                 _currentGun.SetActive(false);
                 _currentGun = _guns[2];
@@ -61,7 +61,6 @@ public class PlayerInventoryScript : MonoBehaviour
         var item = (IItem)itemObject.GetComponent(typeof(IItem));
         if (item.TypeItem == TypeItems.Gun)
         {
-
             var gunItem = (IGun)itemObject.GetComponent(typeof(IGun));
             var gunId = (int)gunItem.TypeGun;
 
@@ -75,16 +74,16 @@ public class PlayerInventoryScript : MonoBehaviour
                 _currentGun.SetActive(false);
             }
 
-            _currentGun = itemObject;
-            _currentGun.transform.SetParent(_rightHand);
-            _currentGun.transform.localPosition = new Vector3(0, 0, 0);
+            itemObject.transform.SetParent(_rightHand);
+            itemObject.transform.localPosition = new Vector3(0, 0, 0);
 
-            foreach (var script in _currentGun.GetComponents<MonoBehaviour>())
+            foreach (var script in itemObject.GetComponents<MonoBehaviour>())
             {
                 script.enabled = true;
             }
 
-            _guns[gunId] = _currentGun;
+            _guns[gunId] = itemObject;
+            _currentGun = _guns[gunId]; 
         }
     }
 

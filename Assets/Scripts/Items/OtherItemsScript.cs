@@ -9,20 +9,26 @@ public class OtherItemsScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            bool takeItem = false;
+
             switch (_otherTypeItems)
             {
-                case OtherTypeItems.Heal:
-                    PlayerInfoScript.Instance.UpdateHeal(1);
+                case OtherTypeItems.Health:
+                    takeItem = PlayerInfoScript.Instance.UpdateHeal(5);
                     break;
                 case OtherTypeItems.Energy:
-                    PlayerInfoScript.Instance.UpdateEnergy(5);
+                    takeItem = PlayerInfoScript.Instance.UpdateEnergy(10);
                     break;
                 case OtherTypeItems.Coin:
                     PlayerInfoScript.Instance.UpdateCoins(1);
+                    takeItem = true;
                     break;
             }
 
-            Destroy(gameObject);
+            if (takeItem)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

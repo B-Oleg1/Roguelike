@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float Damage { get; set; }
+    public int Damage { get; set; }
     public float Speed { get; set; }
     public float LifeTime { get; set; }
 
@@ -24,16 +24,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.TryGetComponent(out MonsterHealth monsterHealth))
+        if (collision.TryGetComponent(out EnemyScript enemyScript))
         {
-            // Hit
-            monsterHealth.Hit();
+            enemyScript.TakeHit(Damage);
+            Destroy(gameObject);
         }
-        else
+        else if (collision.CompareTag("Obstacle"))
         {
-            // Sound
-        }*/
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

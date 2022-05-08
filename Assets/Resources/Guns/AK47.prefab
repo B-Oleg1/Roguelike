@@ -343,7 +343,7 @@ MonoBehaviour:
   _priceBullet: 1
   _shootFrequency: 0.175
   _timeReload: 1.5
-  _bulletSpeed: 9
+  _bulletSpeed: 7
   _lifeTime: 1.75
   _spread: 7.5
   _shootPoint: {fileID: 1396967123027610632}

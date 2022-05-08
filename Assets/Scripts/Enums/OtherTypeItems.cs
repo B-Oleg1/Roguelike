@@ -2,7 +2,7 @@ namespace Assets.Scripts.Enums
 {
     public enum OtherTypeItems
     {
-        Heal,
+        Health,
         Energy,
         Coin
     }
