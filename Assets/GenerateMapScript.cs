@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
+using UnityEngine.AI;
 
 public class GenerateMapScript : MonoBehaviour
 {
-    [SerializeField] private Tilemap _til;
-    [SerializeField] private Tile _tile;
+    [SerializeField] private NavMeshSurface _navMeshSurface;
 
     private Vector2[] _directions = new Vector2[4] { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
     private List<Location> _locations;
@@ -22,6 +22,8 @@ public class GenerateMapScript : MonoBehaviour
         _locations = new List<Location>();
 
         GenerateNewRoom(new Vector2(0, 0), -1, null);
+
+        _navMeshSurface.BuildNavMesh();
     }
 
     private void GenerateNewRoom(Vector2 centralPosition, int cutWallId, Location prevLocation) 
@@ -86,13 +88,7 @@ public class GenerateMapScript : MonoBehaviour
                 break;
         }
 
-        _locations.Add(location);
-
-        foreach (var item in _locations)
-        {
-            print(item.LocationPosition);
-        }
-        print("-----");
+        _locations.Add(location); 
 
         _quantityRooms++;
 

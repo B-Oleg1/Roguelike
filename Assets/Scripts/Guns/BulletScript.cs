@@ -27,6 +27,7 @@ public class BulletScript : MonoBehaviour
         if (collision.TryGetComponent(out EnemyScript enemyScript))
         {
             enemyScript.TakeHit(Damage);
+            Instantiate(Resources.Load<GameObject>("Particles/BloodParticleSystem"), collision.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("Obstacle"))

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class LocationScript : MonoBehaviour
 {
@@ -16,13 +17,15 @@ public class LocationScript : MonoBehaviour
     
     private void SpawnEnemy()
     {
+        CloseLocation();
+
         var enemies = Resources.LoadAll<GameObject>("Characters/Enemies/Default");
-        var allSpawnPoints = _spawnPoints.GetComponentsInChildren<GameObject>();
+        var allSpawnPoints = _spawnPoints.GetComponentsInChildren<Transform>();
         
         for (int i = 0; i < allSpawnPoints.Length; i++)
         {
             var enemy = Instantiate(enemies[Random.Range(0, enemies.Length)],
-                        allSpawnPoints[i].transform.position,
+                        allSpawnPoints[i].position,
                         Quaternion.identity);
             enemy.GetComponent<EnemyScript>().player = _player;
 
@@ -32,8 +35,16 @@ public class LocationScript : MonoBehaviour
 
     private void SpawnChest()
     {
-        var allSpawnChest = _spawnChest.GetComponentsInChildren<GameObject>();
-        Instantiate(Resources.Load("ItemsFromChests/Chest"), allSpawnChest[Random.Range(0, allSpawnChest.Length)].transform.position, Quaternion.identity);
+        var allSpawnChest = _spawnChest.GetComponentsInChildren<Transform>();
+        Instantiate(Resources.Load("ItemsFromChests/Chest"), allSpawnChest[Random.Range(0, allSpawnChest.Length)].position, Quaternion.identity);
+    }
+
+    private void CloseLocation()
+    {
+        var walls = GetComponentsInChildren<Tilemap>()[1];
+        walls.CompressBounds();
+
+        walls.SetTile(new Vector3Int(1, -1, 0), null);
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
