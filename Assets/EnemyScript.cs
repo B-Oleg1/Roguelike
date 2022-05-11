@@ -10,10 +10,11 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _cooldownAttack;
 
+    public GameObject player;
+
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-    private GameObject _player;
 
     private float _currentCooldownAttack;
 
@@ -34,9 +35,9 @@ public class EnemyScript : MonoBehaviour
             _currentCooldownAttack -= Time.deltaTime;
         }
 
-        if (_player != null && _health > 0)
+        if (player != null && _health > 0)
         {
-            if (transform.position.x > _player.transform.position.x)
+            if (transform.position.x > player.transform.position.x)
             {
                 _spriteRenderer.flipX = true;
             } 
@@ -45,9 +46,9 @@ public class EnemyScript : MonoBehaviour
                 _spriteRenderer.flipX = false;
             }
 
-            if (Vector2.Distance(transform.position, _player.transform.position) > 0.95f)
+            if (Vector2.Distance(transform.position, player.transform.position) > 0.95f)
             {
-                _navMeshAgent.destination = _player.transform.position;
+                _navMeshAgent.destination = player.transform.position;
             }
             else if (_currentCooldownAttack <= 0)
             {
@@ -71,13 +72,14 @@ public class EnemyScript : MonoBehaviour
         if (damage >= _health)
         {
             _health = 0;
+            Destroy(GetComponent<BoxCollider2D>());
             _animator.SetTrigger("Death");
 
             GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Coin, 3, transform.position);
             GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Health, 1, transform.position);
             GameManagerScript.Instance.SpawnOtherItems(OtherTypeItems.Energy, 3, transform.position);
-
-            Destroy(gameObject, 5);
+            
+            Destroy(gameObject, 5); 
         }
         else
         {
