@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GenerateMapScript : MonoBehaviour
 {
     [SerializeField] private GameObject _map;
-    [SerializeField] private NavMeshSurface _navMeshSurface;
+  ///  [SerializeField] private NavMeshSurface _navMeshSurface;
 
     private readonly Vector2[] _directions = { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
 
@@ -25,7 +25,7 @@ public class GenerateMapScript : MonoBehaviour
 
         GenerateNewRoom(new Vector2(0, 0), -1, null);
 
-        _navMeshSurface.BuildNavMesh();
+        //_navMeshSurface.BuildNavMesh();
 
         DrawMap();
     }
@@ -274,6 +274,7 @@ public class GenerateMapScript : MonoBehaviour
                     var bridgeScale = locationOnMap.transform.localScale;
                     bridgeScale.Set(1, 1, 1);
                     locationOnMap.transform.localScale = bridgeScale;
+<<<<<<< Updated upstream
                     
                     bridgeRectTransform.anchoredPosition = rectTransform.anchoredPosition; 
                     
@@ -297,6 +298,29 @@ public class GenerateMapScript : MonoBehaviour
             }
         
             if (item.Bridges[0] || item.Bridges[1] || item.Bridges[2] || item.Bridges[3])
+=======
+
+                    switch (i)
+                    {
+                        case 0:
+
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            break;
+                    }
+
+                    bridgeRectTransform.sizeDelta = new Vector2(11, 3);
+                    bridgeRectTransform.anchoredPosition = rectTransform.anchoredPosition;
+                }
+            }
+            if (item.Bridges[0])
+>>>>>>> Stashed changes
             {
                 
             }
