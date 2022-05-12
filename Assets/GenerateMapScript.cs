@@ -9,9 +9,9 @@ public class GenerateMapScript : MonoBehaviour
 {
     [SerializeField] private NavMeshSurface _navMeshSurface;
 
-    private Vector2[] _directions = new Vector2[4] { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
-    private List<Location> _locations;
+    private readonly Vector2[] _directions = { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
 
+    private List<Location> _locations;
 
     private int _maxRooms = 0;
     private int _quantityRooms = 0;
@@ -26,7 +26,7 @@ public class GenerateMapScript : MonoBehaviour
         _navMeshSurface.BuildNavMesh();
     }
 
-    private void GenerateNewRoom(Vector2 centralPosition, int cutWallId, Location prevLocation) 
+    private void GenerateNewRoom(Vector2 centralPosition, int cutWallId, Location prevLocation)
     {
         TypeRooms typeLocation = TypeRooms.Default;
         if (_quantityRooms == 0)
@@ -54,7 +54,7 @@ public class GenerateMapScript : MonoBehaviour
             typeLocation = TypeRooms.Boss;
         }
 
-        var allLocations = Resources.LoadAll<GameObject>($"Locations/{typeLocation}"); 
+        var allLocations = Resources.LoadAll<GameObject>($"Locations/{typeLocation}");
         var locationObject = Instantiate(allLocations[Random.Range(0, allLocations.Length)], new Vector3(0, 0, 0), Quaternion.identity);
 
         var tilemap = locationObject.GetComponentsInChildren<Tilemap>()[1];
@@ -95,7 +95,7 @@ public class GenerateMapScript : MonoBehaviour
         if (cutWallId >= 0 && cutWallId < 4)
         {
             CutWall(tilemap, cutWallId);
-            location.Bridges[cutWallId] = true; 
+            location.Bridges[cutWallId] = true;
         }
 
         for (int i = 0; i < 4; i++)
@@ -105,9 +105,9 @@ public class GenerateMapScript : MonoBehaviour
             if (location.Bridges[i] == false && chanceToSpawnBridge <= 3 && _quantityRooms < _maxRooms &&
                 !_locations.Any(item => item.LocationObject != location.LocationObject && item.LocationPosition == location.LocationPosition + _directions[i]))
             {
-                var locationPos = SetBridge(tilemap, i);
+                var centerBridgePosition = SetBridge(tilemap, i);
 
-                GenerateNewRoom(locationPos, (i + 2) % 4, location);
+                GenerateNewRoom(centerBridgePosition, (i + 2) % 4, location);
             }
             else if (prevLocation == null && i == 3 && _quantityRooms < _maxRooms)
             {
@@ -118,9 +118,9 @@ public class GenerateMapScript : MonoBehaviour
                         if (_locations[a].Bridges[j] == false && _quantityRooms < _maxRooms &&
                             !_locations.Any(item => item.LocationObject != _locations[a].LocationObject && item.LocationPosition == _locations[a].LocationPosition + _directions[j]))
                         {
-                            var locationPos = SetBridge(_locations[a].LocationObject.GetComponentsInChildren<Tilemap>()[1], j);
+                            var centerBridgePosition = SetBridge(_locations[a].LocationObject.GetComponentsInChildren<Tilemap>()[1], j);
 
-                            GenerateNewRoom(locationPos, (j + 2) % 4, _locations[a]);
+                            GenerateNewRoom(centerBridgePosition, (j + 2) % 4, _locations[a]);
                         }
                     }
                 }
@@ -165,30 +165,30 @@ public class GenerateMapScript : MonoBehaviour
         var bridgeSize = bridge.GetComponentsInChildren<Tilemap>()[1];
         bridgeSize.CompressBounds();
 
-        Vector2 locationPos = new Vector2(0, 0);
+        Vector2 centerBridgePosition = new Vector2(0, 0);
         switch (bridgeId)
         {
             case 0:
-                locationPos = new Vector2(bridge.transform.position.x + bridgeSize.size.x,
+                centerBridgePosition = new Vector2(bridge.transform.position.x + bridgeSize.size.x,
                                           bridge.transform.position.y - (bridgeSize.size.y - 1) / 2);
                 break;
             case 1:
-                locationPos = new Vector2(bridge.transform.position.x + (bridgeSize.size.y - 1) / 2,
+                centerBridgePosition = new Vector2(bridge.transform.position.x + (bridgeSize.size.y - 1) / 2,
                                           bridge.transform.position.y + bridgeSize.size.x - 1);
                 break;
             case 2:
-                locationPos = new Vector2(bridge.transform.position.x - bridgeSize.size.x,
+                centerBridgePosition = new Vector2(bridge.transform.position.x - bridgeSize.size.x,
                                           bridge.transform.position.y + (bridgeSize.size.y - 1) / 2 + 1);
                 break;
             case 3:
-                locationPos = new Vector2(bridge.transform.position.x - (bridgeSize.size.y - 1) / 2 - 1,
+                centerBridgePosition = new Vector2(bridge.transform.position.x - (bridgeSize.size.y - 1) / 2 - 1,
                                           bridge.transform.position.y - bridgeSize.size.x);
                 break;
             default:
                 break;
         }
 
-        return locationPos;
+        return centerBridgePosition;
     }
 
     private void CutWall(Tilemap tilemap, int wallId)
