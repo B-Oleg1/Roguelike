@@ -87,6 +87,6 @@ public class RifleScript : MonoBehaviour, IItem, IGun
         
         bullet.GetComponent<BulletScript>().LifeTime = LifeTime;
         bullet.GetComponent<BulletScript>().Speed = BulletSpeed;
-        bullet.GetComponent<BulletScript>().Damage = Damage;
+        bullet.GetComponent<BulletScript>().Damage = Damage; 
     }
 }
