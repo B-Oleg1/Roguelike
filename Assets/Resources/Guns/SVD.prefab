@@ -258,8 +258,8 @@ MonoBehaviour:
   _rarityItem: 1
   _typeGun: 0
   _maxBullets: 5
-  _damage: 20
-  _priceBullet: 10
+  _damage: 30
+  _priceBullet: 5
   _shootFrequency: 1.75
   _timeReload: 5
   _bulletSpeed: 14
