@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GenerateMapScript : MonoBehaviour
 {
+    [SerializeField] private GameObject _map;
     [SerializeField] private NavMeshSurface _navMeshSurface;
 
     private readonly Vector2[] _directions = { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
@@ -24,6 +26,8 @@ public class GenerateMapScript : MonoBehaviour
         GenerateNewRoom(new Vector2(0, 0), -1, null);
 
         _navMeshSurface.BuildNavMesh();
+
+        DrawMap();
     }
 
     private void GenerateNewRoom(Vector2 centralPosition, int cutWallId, Location prevLocation)
@@ -217,6 +221,61 @@ public class GenerateMapScript : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private void DrawMap()
+    {
+        foreach (var item in _locations)
+        {
+            var locationOnMap = new GameObject();
+            var rectTransform = locationOnMap.AddComponent<RectTransform>();
+
+            rectTransform.SetParent(_map.transform);
+
+            var scale = locationOnMap.transform.localScale;
+            scale.Set(1, 1, 1);
+            locationOnMap.transform.localScale = scale;
+
+            rectTransform.anchoredPosition = item.LocationPosition * 22;
+            rectTransform.sizeDelta = new Vector2(11, 11);
+
+            var image = locationOnMap.AddComponent<Image>();
+            switch (item.TypeRoom)
+            {
+                case TypeRooms.Spawn:
+                    image.color = new Color(1, 1, 1);
+                    break;
+                case TypeRooms.Default:
+                    image.color = new Color(0.91f, 0.55f, 0);
+                    break;
+                case TypeRooms.Loot:
+                    image.color = new Color(0, 0.85f, 0);
+                    break;
+                case TypeRooms.Store:
+                    image.color = new Color(0.9f, 0.89f, 0);
+                    break;
+                case TypeRooms.Boss:
+                    image.color = new Color(0.85f, 0, 0);
+                    break;
+                default:
+                    break;
+            }
+
+            if (item.Bridges[0])
+            {
+                var bridgeOnMap = new GameObject();
+                var bridgeRectTransform = bridgeOnMap.AddComponent<RectTransform>();
+
+                bridgeRectTransform.SetParent(_map.transform);
+
+                var bridgeScale = locationOnMap.transform.localScale;
+                bridgeScale.Set(1, 1, 1);
+                locationOnMap.transform.localScale = bridgeScale;
+
+                bridgeRectTransform.sizeDelta = new Vector2(11, 3);
+                bridgeRectTransform.anchoredPosition = rectTransform.anchoredPosition;
+            }
         }
     }
 }

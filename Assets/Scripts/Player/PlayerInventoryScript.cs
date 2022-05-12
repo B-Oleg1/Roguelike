@@ -92,12 +92,12 @@ public class PlayerInventoryScript : MonoBehaviour
 
             itemObject.transform.GetChild(itemObject.transform.childCount - 1).gameObject.SetActive(false);
 
-            _inventoryUI[gunId].transform.GetChild(0).GetComponent<Text>().text = itemObject.name;
+            _inventoryUI[gunId].transform.GetChild(0).GetComponent<Text>().text = itemObject.name.Substring(0, itemObject.name.Length - 7);
             _inventoryUI[gunId].transform.GetChild(1).GetComponent<Image>().sprite = itemObject.GetComponent<SpriteRenderer>().sprite;
             _inventoryUI[gunId].transform.GetChild(1).GetComponent<Image>().color = new Color(1, 1, 1, 100);
             _inventoryUI[gunId].transform.GetChild(2).GetChild(1).GetComponent<Text>().text = itemObject.GetComponent<RifleScript>().PriceBullet.ToString();
 
-            _guns[gunId] = itemObject;
+            _guns[gunId] = itemObject; 
             _currentGun = _guns[gunId];
         }
     }

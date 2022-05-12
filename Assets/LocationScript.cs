@@ -69,28 +69,28 @@ public class LocationScript : MonoBehaviour
         walls.CompressBounds();
 
         TileBase wallSprite = null;
-        if (_cutWalls[0] == true)
+        if (_cutWalls[0])
         {
             wallSprite = closeWalls ? walls.GetTile(new Vector3Int((walls.size.x - 1) / 2 - 2, -1, 0)) : null;
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2 - 1, -1, 0), wallSprite);
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2, -1, 0), wallSprite);
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2 + 1, -1, 0), wallSprite);
         }
-        if (_cutWalls[1] == true)
+        if (_cutWalls[1])
         {
             wallSprite = closeWalls ? walls.GetTile(new Vector3Int(walls.size.x - 1, -(walls.size.y - 1) / 2 + 1, 0)) : null;
             walls.SetTile(new Vector3Int(walls.size.x - 1, -(walls.size.y - 1) / 2, 0), wallSprite);
             walls.SetTile(new Vector3Int(walls.size.x - 1, -(walls.size.y - 1) / 2 - 1, 0), wallSprite);
             walls.SetTile(new Vector3Int(walls.size.x - 1, -(walls.size.y - 1) / 2 - 2, 0), wallSprite);
         }
-        if (_cutWalls[2] == true)
+        if (_cutWalls[2])
         {
             wallSprite = closeWalls ? walls.GetTile(new Vector3Int((walls.size.x - 1) / 2 - 2, -walls.size.y, 0)) : null;
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2 - 1, -walls.size.y, 0), wallSprite);
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2, -walls.size.y, 0), wallSprite);
             walls.SetTile(new Vector3Int((walls.size.x - 1) / 2 + 1, -walls.size.y, 0), wallSprite);
         }
-        if (_cutWalls[3] == true)
+        if (_cutWalls[3])
         {
             wallSprite = closeWalls ? walls.GetTile(new Vector3Int(0, -(walls.size.y - 1) / 2 + 1, 0)) : null;
             walls.SetTile(new Vector3Int(0, -(walls.size.y - 1) / 2, 0), wallSprite);
