@@ -262,19 +262,43 @@ public class GenerateMapScript : MonoBehaviour
                     break;
             }
 
-            if (item.Bridges[0])
+            for (int i = 0; i < item.Bridges.Length; i++)
             {
-                var bridgeOnMap = new GameObject();
-                var bridgeRectTransform = bridgeOnMap.AddComponent<RectTransform>();
+                if (item.Bridges[i])
+                {
+                    var bridgeOnMap = new GameObject();
+                    var bridgeRectTransform = bridgeOnMap.AddComponent<RectTransform>();
 
-                bridgeRectTransform.SetParent(_map.transform);
+                    bridgeRectTransform.SetParent(_map.transform);
 
-                var bridgeScale = locationOnMap.transform.localScale;
-                bridgeScale.Set(1, 1, 1);
-                locationOnMap.transform.localScale = bridgeScale;
-
-                bridgeRectTransform.sizeDelta = new Vector2(11, 3);
-                bridgeRectTransform.anchoredPosition = rectTransform.anchoredPosition;
+                    var bridgeScale = locationOnMap.transform.localScale;
+                    bridgeScale.Set(1, 1, 1);
+                    locationOnMap.transform.localScale = bridgeScale;
+                    
+                    bridgeRectTransform.anchoredPosition = rectTransform.anchoredPosition; 
+                    
+                    
+                    switch (i) 
+                    {
+                        case 0:
+                            bridgeRectTransform.sizeDelta = new Vector2(11, 3); 
+                            break;
+                        case 1:
+                            bridgeRectTransform.sizeDelta = new Vector2(3, 11);
+                            break;
+                        case 2:
+                            bridgeRectTransform.sizeDelta = new Vector2(11, 3);
+                            break;
+                        case 3:
+                            bridgeRectTransform.sizeDelta = new Vector2(3, -11);
+                            break;
+                    }
+                }
+            }
+        
+            if (item.Bridges[0] || item.Bridges[1] || item.Bridges[2] || item.Bridges[3])
+            {
+                
             }
         }
     }
