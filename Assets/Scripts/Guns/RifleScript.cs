@@ -83,10 +83,13 @@ public class RifleScript : MonoBehaviour, IItem, IGun
         float angle = Vector2.SignedAngle(Vector2.right, direction);
         Vector3 targetRotation = new Vector3(0, 0, angle);
 
-        var bullet = Instantiate(BulletObject, new Vector2(ShootPoint.position.x, ShootPoint.position.y + 0.1f), Quaternion.Euler(targetRotation + new Vector3(0, 0, Random.Range(-Spread, Spread))));
-        
-        bullet.GetComponent<BulletScript>().LifeTime = LifeTime;
-        bullet.GetComponent<BulletScript>().Speed = BulletSpeed;
-        bullet.GetComponent<BulletScript>().Damage = Damage; 
+        var bullet = Instantiate(BulletObject,
+                                 new Vector2(ShootPoint.position.x, ShootPoint.position.y + 0.1f),
+                                 Quaternion.Euler(targetRotation + new Vector3(0, 0, Random.Range(-Spread, Spread))));
+
+        var bulletScript = bullet.GetComponent<BulletScript>();
+        bulletScript.LifeTime = LifeTime;
+        bulletScript.Speed = BulletSpeed;
+        bulletScript.Damage = Damage; 
     }
 }

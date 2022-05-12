@@ -29,17 +29,6 @@ public class PlayerMovementScript : MonoBehaviour
         if (_rigidbody2D.velocity.magnitude > 0.1f)
         {
             _animator.SetBool("Run", true);
-
-            //if (_moveX < 0 && _lookRight)
-            //{
-            //    transform.rotation = Quaternion.Euler(0, 180, 0);
-            //    _lookRight = false;
-            //}
-            //else if (_moveX > 0 && !_lookRight)
-            //{
-            //    transform.rotation = Quaternion.Euler(0, 0, 0);
-            //    _lookRight = true;
-            //}
         }
         else
         {
