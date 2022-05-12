@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4207154425433501742
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9158914876696627543
 Transform:
   m_ObjectHideFlags: 0
@@ -370,8 +370,8 @@ MonoBehaviour:
   _rarityItem: 0
   _typeGun: 1
   _maxBullets: 12
-  _damage: 20
-  _priceBullet: 3
+  _damage: 5
+  _priceBullet: 0
   _shootFrequency: 0.25
   _timeReload: 1
   _bulletSpeed: 7.5
