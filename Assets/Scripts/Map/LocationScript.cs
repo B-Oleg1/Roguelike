@@ -161,7 +161,10 @@ public class LocationScript : MonoBehaviour
                 ChangeWalls(false);
                 SpawnChest();
 
-                StartCoroutine(LoadNewGame());
+                if (_boss != null)
+                {
+                    StartCoroutine(LoadNewGame());
+                }
             }
         }
     }
