@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GenerateMapScript : MonoBehaviour
 {
     [SerializeField] private GameObject _map;
-    ///  [SerializeField] private NavMeshSurface _navMeshSurface;
+    [SerializeField] private NavMeshSurface _navMeshSurface;
 
     private readonly Vector2[] _directions = { Vector2.right, Vector2.up, Vector2.left, Vector2.down };
 
@@ -24,8 +24,8 @@ public class GenerateMapScript : MonoBehaviour
         _locations = new List<Location>();
 
         GenerateNewRoom(new Vector2(0, 0), -1, null);
-        print(_quantityRooms);
-        //_navMeshSurface.BuildNavMesh();
+
+        _navMeshSurface.BuildNavMesh();
 
         DrawMap();
     }
@@ -311,8 +311,6 @@ public class GenerateMapScript : MonoBehaviour
                         default:
                             break;
                     }
-                    
-
                 }
             }
         }

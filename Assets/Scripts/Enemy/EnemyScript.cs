@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] public int _health;
     [SerializeField] private int _damage;
     [SerializeField] private float _cooldownAttack;
 
@@ -20,12 +20,14 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        print(gameObject.name);
 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.updateRotation = false;
         _navMeshAgent.updateUpAxis = false;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()

@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 7478065182611743898}
   - component: {fileID: 7478065182611743899}
   - component: {fileID: 7478065182611743897}
-  - component: {fileID: 4506788385414485996}
   - component: {fileID: 532246813858179351}
+  - component: {fileID: 4506788385414485996}
   - component: {fileID: 464863725904005391}
+  - component: {fileID: 2646921442757859457}
   - component: {fileID: 3195744410877017912}
   m_Layer: 0
   m_Name: Golem3000
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 7478065182611743908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,32 +107,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &4506788385414485996
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478065182611743908}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0067869425, y: -0.09501833}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
-    newSize: {x: 4, y: 4}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.8960187, y: 1.7467045}
-  m_EdgeRadius: 0
 --- !u!50 &532246813858179351
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +127,33 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &4506788385414485996
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478065182611743908}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01695767, y: -0.09501833}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 4, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.468615, y: 1.7467045}
+  m_EdgeRadius: 0
 --- !u!195 &464863725904005391
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -162,8 +163,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 7478065182611743908}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
-  m_Speed: 3.5
+  m_Radius: 0.75
+  m_Speed: 3.15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -171,10 +172,26 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 4
-  m_BaseOffset: 2
+  m_Height: 1.7
+  m_BaseOffset: 0.93
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2646921442757859457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478065182611743908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd68705b17f097b4785875b3fe4ed223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 550
+  _damage: 17
+  _cooldownAttack: 3.5
+  player: {fileID: 0}
 --- !u!114 &3195744410877017912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +204,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d6adb11c42d384b93b75ea82a48278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _secondPhase: {fileID: 0}
