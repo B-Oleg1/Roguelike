@@ -8,6 +8,7 @@ public class PlayerInfoScript : MonoBehaviour
 {
     public static PlayerInfoScript Instance { get; private set; }
 
+    [SerializeField] private GameObject _upgradesPanel;
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private Text _healthText;
     [SerializeField] private Slider _energySlider;
@@ -20,6 +21,7 @@ public class PlayerInfoScript : MonoBehaviour
     public int Energy { get; private set; }
     public int Power { get; private set; }
     public int Coins { get; private set; }
+    public int UpgradesPoints { get; set; }
 
     private void Start()
     {
@@ -28,16 +30,85 @@ public class PlayerInfoScript : MonoBehaviour
             Instance = this;
         }
 
-        MaxHealth = 100;
-        MaxEnergy = 100;
+        if (!PlayerPrefs.HasKey("MaxHealth"))
+        {
+            PlayerPrefs.SetInt("MaxHealth", 100);
+        }
+        if (!PlayerPrefs.HasKey("MaxEnergy"))
+        {
+            PlayerPrefs.SetInt("MaxEnergy", 100);
+        }
+        if (!PlayerPrefs.HasKey("Coins"))
+        {
+            PlayerPrefs.SetInt("Coins", 0);
+        }
+        if (!PlayerPrefs.HasKey("UpgradesPoints"))
+        {
+            PlayerPrefs.SetInt("UpgradesPoints", 0);
+        }
+
+        MaxHealth = PlayerPrefs.GetInt("MaxHealth");
+        MaxEnergy = PlayerPrefs.GetInt("MaxEnergy");
+        Coins = PlayerPrefs.GetInt("Coins");
+        UpgradesPoints = PlayerPrefs.GetInt("UpgradesPoints", 0);
 
         Health = MaxHealth;
         Energy = MaxEnergy;
-        Coins = 0;
 
         UpdateHeal(0);
         UpdateEnergy(0);
         UpdateCoins(0);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            _upgradesPanel.SetActive(!_upgradesPanel.activeInHierarchy);
+        }
+        print(UpgradesPoints + " " + MaxHealth);
+    }
+
+    public void UpgradeSkills(string name)
+    {
+        if (name == "PlusHealth" && UpgradesPoints > 0)
+        {
+            UpgradesPoints--;
+            MaxHealth += 10;
+            UpdateHeal(0);
+        }
+        else if (name == "MinusHealth")
+        {
+            UpgradesPoints++;
+            MaxHealth -= 10;
+            UpdateHeal(0);
+        }
+        else if (name == "PlusEnergy" && UpgradesPoints > 0)
+        {
+            UpgradesPoints--;
+            MaxEnergy += 10;
+            UpdateEnergy(0);
+        }
+        else if (name == "MinusEnergy")
+        {
+            UpgradesPoints++;
+            MaxEnergy -= 10;
+            UpdateEnergy(0);
+        }
+        else if (name == "PlusPower" && UpgradesPoints > 0)
+        {
+            UpgradesPoints--;
+            Power += 3;
+        }
+        else if (name == "MinusPower")
+        {
+            UpgradesPoints++;
+        }
+
+        if (UpgradesPoints > 0)
+        {
+
+        }
     }
 
     public bool UpdateHeal(int quantity)
@@ -50,7 +121,9 @@ public class PlayerInfoScript : MonoBehaviour
         }
         else if (Health + quantity <= 0)
         {
-            // Game over
+            PlayerPrefs.SetInt("MaxHealth", 100);
+            PlayerPrefs.SetInt("MaxEnergy", 100);
+            PlayerPrefs.SetInt("Coins", 0);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else

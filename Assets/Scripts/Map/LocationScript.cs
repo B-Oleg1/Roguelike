@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class LocationScript : MonoBehaviour
@@ -92,8 +93,7 @@ public class LocationScript : MonoBehaviour
 
     private void SpawnChest()
     {
-        var allSpawnChest = _spawnChest.GetComponentsInChildren<Transform>();
-        Instantiate(Resources.Load("ItemsFromChests/Chest"), allSpawnChest[Random.Range(0, allSpawnChest.Length)].localPosition, Quaternion.identity);
+        Instantiate(Resources.Load("ItemsFromChests/Chest"), _spawnChest.transform.position, Quaternion.identity);
     }
 
     private void ChangeWalls(bool closeWalls)
@@ -157,9 +157,24 @@ public class LocationScript : MonoBehaviour
             if (_quantityEnemies <= 0)
             {
                 _isFinished = true;
+                PlayerInfoScript.Instance.UpgradesPoints++;
                 ChangeWalls(false);
                 SpawnChest();
+
+                StartCoroutine(LoadNewGame());
             }
         }
+    }
+
+    private IEnumerator LoadNewGame()
+    {
+        PlayerPrefs.SetInt("MaxHealth", PlayerInfoScript.Instance.MaxHealth);
+        PlayerPrefs.SetInt("MaxEnergy", PlayerInfoScript.Instance.MaxEnergy);
+        PlayerPrefs.SetInt("Coins", PlayerInfoScript.Instance.Coins);
+        PlayerPrefs.SetInt("UpgradesPoints", PlayerInfoScript.Instance.UpgradesPoints);
+
+        yield return new WaitForSeconds(7.5f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

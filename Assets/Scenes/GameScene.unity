@@ -856,7 +856,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 179.96, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 33.765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322302665
 MonoBehaviour:
@@ -1134,7 +1134,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 359732521}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MinusHealth
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &359732521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,7 +1406,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 571586527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MinusEnergy
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &571586527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,7 +1977,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 179.96, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 33.765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748277176
 MonoBehaviour:
@@ -2225,6 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e64b900a2ccf344a408f969904a5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _upgradesPanel: {fileID: 2099866284}
   _healthSlider: {fileID: 1341821978}
   _healthText: {fileID: 2040946304}
   _energySlider: {fileID: 1697437884}
@@ -2312,7 +2337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 873686640}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlusHealth
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &873686640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3164,7 +3201,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 179.96, y: -50}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 33.765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1144311830
 MonoBehaviour:
@@ -3986,7 +4023,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1540563966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MinusPower
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1540563966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4973,7 +5022,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999392177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlusEnergy
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1999392177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5368,7 +5429,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2109862648}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864994362}
+        m_TargetAssemblyTypeName: PlayerInfoScript, Assembly-CSharp
+        m_MethodName: UpgradeSkills
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PlusPower
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2109862648
 MonoBehaviour:
   m_ObjectHideFlags: 0
