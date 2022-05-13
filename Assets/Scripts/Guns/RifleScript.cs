@@ -90,6 +90,6 @@ public class RifleScript : MonoBehaviour, IItem, IGun
         var bulletScript = bullet.GetComponent<BulletScript>();
         bulletScript.LifeTime = LifeTime;
         bulletScript.Speed = BulletSpeed;
-        bulletScript.Damage = Damage; 
+        bulletScript.Damage = Damage + PlayerInfoScript.Instance.Power; 
     }
 }
