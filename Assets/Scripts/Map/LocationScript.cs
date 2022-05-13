@@ -6,18 +6,24 @@ using UnityEngine.Tilemaps;
 
 public class LocationScript : MonoBehaviour
 {
+    [SerializeField] private GameObject _boss;
     [SerializeField] private GameObject _spawnPoints;
     [SerializeField] private GameObject _spawnChest;
 
     private GameObject _player;
+    private GameObject[] _enemies;
 
-    private bool[] _cutWalls = new bool[4];
     private int _quantityEnemies = 0;
+    private float _cooldownSpawn = 0;
+    private bool[] _cutWalls = new bool[4];
     private bool _isActivated = false;
     private bool _isFinished = false;
+    private bool _bossSpawned = false;
 
     private void Start()
     {
+        _enemies = Resources.LoadAll<GameObject>("Characters/Enemies/Default");
+
         var walls = GetComponentsInChildren<Tilemap>()[1];
         walls.CompressBounds();
 
@@ -39,19 +45,46 @@ public class LocationScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (_isActivated)
+        {
+            if (_cooldownSpawn > 0)
+            {
+                _cooldownSpawn -= Time.deltaTime;
+            }
+
+            if (_boss != null && _cooldownSpawn <= 0 && !_isFinished)
+            {
+                _cooldownSpawn = 15;
+                SpawnEnemy();
+            }
+        }
+    }
+
     private void SpawnEnemy()
     {
         ChangeWalls(true);
 
-        var enemies = Resources.LoadAll<GameObject>("Characters/Enemies/Default");
         var allSpawnPoints = _spawnPoints.GetComponentsInChildren<Transform>();
         
         for (int i = 0; i < allSpawnPoints.Length; i++)
         {
-            var enemy = Instantiate(enemies[Random.Range(0, enemies.Length)],
+            var enemy = Instantiate(_enemies[Random.Range(0, _enemies.Length)],
                         allSpawnPoints[i].position,
                         Quaternion.identity);
             enemy.GetComponent<EnemyScript>().player = _player;
+
+            _quantityEnemies++;
+        }
+
+        if (_boss != null && !_bossSpawned)
+        {
+            _bossSpawned = true;
+            _cooldownSpawn = 15;
+
+            var boss = Instantiate(_boss, _spawnPoints.transform.GetChild(Random.Range(0, _spawnPoints.transform.childCount)).position, Quaternion.identity);
+            boss.GetComponent<EnemyScript>().player = _player;
 
             _quantityEnemies++;
         }
@@ -60,7 +93,7 @@ public class LocationScript : MonoBehaviour
     private void SpawnChest()
     {
         var allSpawnChest = _spawnChest.GetComponentsInChildren<Transform>();
-        Instantiate(Resources.Load("ItemsFromChests/Chest"), allSpawnChest[Random.Range(0, allSpawnChest.Length)].position, Quaternion.identity);
+        Instantiate(Resources.Load("ItemsFromChests/Chest"), allSpawnChest[Random.Range(0, allSpawnChest.Length)].localPosition, Quaternion.identity);
     }
 
     private void ChangeWalls(bool closeWalls)
@@ -105,6 +138,7 @@ public class LocationScript : MonoBehaviour
         {
             _isActivated = true;
             _player = collision.gameObject;
+            
             SpawnEnemy();
         }
     }
